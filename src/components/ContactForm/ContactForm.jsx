@@ -1,24 +1,14 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import s from "./ContactForm.module.css";
-const ContactForm = ({ handleAddContact }) => {
+import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import { addContact } from "../../redux/contactsSlice";
+
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const initialValues = { id: "", name: "", number: "" };
 
-  const contactSchema = Yup.object({
-    name: Yup.string()
-      .min(3, "To short")
-      .max(50, "To long")
-      .required("Is required!"),
-    number: Yup.string()
-      .matches(/^[0-9-]+$/, "numbers only")
-      .min(9, "To short")
-      .max(9, "To long")
-      .required("Is required!"),
-  });
-
-  //! Додаткова фунція до валідації. добавляє слеші і в умові дз не було валідації на 7 цифр.це моє рішення..
-
-  // Function to format the phone number with hyphens
   const formatPhoneNumber = (value) => {
     // Remove all non-numeric characters
     const cleaned = ("" + value).replace(/\D/g, "");
@@ -33,9 +23,21 @@ const ContactForm = ({ handleAddContact }) => {
   };
 
   const handleSubmit = (values, options) => {
-    handleAddContact(values);
+    const newContact = { ...values, id: nanoid() };
+    dispatch(addContact(newContact));
     options.resetForm();
   };
+  const contactSchema = Yup.object({
+    name: Yup.string()
+      .min(3, "To short")
+      .max(50, "To long")
+      .required("Is required!"),
+    number: Yup.string()
+      .matches(/^[0-9-]+$/, "numbers only")
+      .min(9, "To short")
+      .max(15, "To long")
+      .required("Is required!"),
+  });
 
   return (
     <div className={s.formWrapper}>

@@ -1,8 +1,13 @@
 import { User, Phone, Trash2 } from "lucide-react";
 import s from "./Contact.module.css";
-const Contact = ({ item, handleDeleteContact }) => {
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
+
+const Contact = ({ item }) => {
+  const dispatch = useDispatch();
+
   return (
-    <li className={s.contactItem}>
+    <div className={s.contactItem}>
       <div>
         <p className={s.contactName}>
           <User className={s.contactIcon} size={14} />
@@ -15,11 +20,11 @@ const Contact = ({ item, handleDeleteContact }) => {
       </div>
       <button
         className={s.deleteButton}
-        onClick={() => handleDeleteContact(item.id)}
+        onClick={() => dispatch(deleteContact(item.id))}
       >
         <Trash2 className={s.deleteIcon} size={14} /> Delete
       </button>
-    </li>
+    </div>
   );
 };
 
