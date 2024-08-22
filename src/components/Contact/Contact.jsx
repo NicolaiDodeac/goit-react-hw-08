@@ -1,7 +1,7 @@
 import { User, Phone, Trash2 } from "lucide-react";
 import s from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
+import { deleteContactThunk } from "../../redux/contactsOps";
 
 const Contact = ({ item }) => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Contact = ({ item }) => {
       </div>
       <button
         className={s.deleteButton}
-        onClick={() => dispatch(deleteContact(item.id))}
+        onClick={() => dispatch(deleteContactThunk(item.id))}
       >
         <Trash2 className={s.deleteIcon} size={14} /> Delete
       </button>
