@@ -12,3 +12,8 @@ h1 {
   width: 100vw;
   height: 80vh;
 }
+.loader {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}

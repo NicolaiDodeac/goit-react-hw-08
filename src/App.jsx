@@ -7,6 +7,7 @@ import { selectError, selectLoading } from "./redux/selectors";
 import { fetchContactsThunk } from "./redux/contactsOps";
 import { useEffect } from "react";
 import Loader from "./components/Loader/Loader";
+import clsx from "clsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,12 +19,16 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={s.wrapper}>
+    <div className={clsx(s.wrapper, "relative")}>
       <h1>Phonebook</h1>
       <ContactForm />
       <SearchBox />
       <ContactList />
-      {loading && <Loader />}
+      {loading && (
+        <span className={s.loader}>
+          <Loader />
+        </span>
+      )}
       {error && <h2>error</h2>}
     </div>
   );
