@@ -55,7 +55,14 @@ const contactsSlice = createSlice({
       .addCase(deleteContactThunk.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
-      });
+      })
+      .addMatcher(
+        (action) => action.type.endsWith("pending"),
+        (state) => {
+          state.error = false;
+          state.loading = true;
+        }
+      );
   },
 });
 // // Мемоізований селектор для фільтрації контактів
