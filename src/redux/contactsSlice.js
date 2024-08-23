@@ -21,47 +21,37 @@ const contactsSlice = createSlice({
     builder
       .addCase(fetchContactsThunk.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.loading = false;
       })
-      .addCase(fetchContactsThunk.pending, (state) => {
-        state.error = false;
-        state.loading = true;
-      })
-      .addCase(fetchContactsThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      })
+
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.items.push(action.payload);
-        state.loading = false;
       })
-      .addCase(addContactThunk.pending, (state) => {
-        state.error = false;
-        state.loading = true;
-      })
-      .addCase(addContactThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      })
+
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
         );
-        state.loading = false;
       })
-      .addCase(deleteContactThunk.pending, (state) => {
-        state.error = false;
-        state.loading = true;
-      })
-      .addCase(deleteContactThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      })
+
       .addMatcher(
         (action) => action.type.endsWith("pending"),
         (state) => {
           state.error = false;
           state.loading = true;
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("rejected"),
+        (state, action) => {
+          state.error = action.payload;
+          state.loading = false;
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("fulfilled"),
+        (state) => {
+          // state.error = false;
+          state.loading = false;
         }
       );
   },

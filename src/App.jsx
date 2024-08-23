@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectError, selectLoading } from "./redux/selectors";
 import { fetchContactsThunk } from "./redux/contactsOps";
 import { useEffect } from "react";
+import Loader from "./components/Loader/Loader";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,8 +23,8 @@ function App() {
       <ContactForm />
       <SearchBox />
       <ContactList />
-      {loading && <h2>Loading</h2>}
-      {error && <h2>Error</h2>}
+      {loading && <Loader />}
+      {error && <h2>error</h2>}
     </div>
   );
 }
