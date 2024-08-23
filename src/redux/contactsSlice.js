@@ -5,6 +5,7 @@ import {
   deleteContactThunk,
   fetchContactsThunk,
 } from "./contactsOps";
+import { selectContacts, selectNameFilter } from "./selectors";
 
 const initialState = {
   items: [],
@@ -65,16 +66,14 @@ const contactsSlice = createSlice({
       );
   },
 });
-// // Мемоізований селектор для фільтрації контактів
-// export const selectContacts = (state) => state.contacts.items;
-// export const selectFilter = (state) => state.filter;
 
-// export const selectFilteredContacts = createSelector(
-//   [selectContacts, selectFilter],
-//   (contacts, filter) => {
-//     return contacts.filter((contact) =>
-//       contact.name.toLowerCase().includes(filter.toLowerCase())
-//     );
-//   }
-// );
+export const selectFilteredContacts = createSelector(
+  [selectContacts, selectNameFilter],
+  (contacts, filter) => {
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }
+);
 export const contactsReducer = contactsSlice.reducer;
+console.log(selectFilteredContacts);
