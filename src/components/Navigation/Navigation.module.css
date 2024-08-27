@@ -1,0 +1,12 @@
+.link {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+  /* display: inline-block; */
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 700;
+  color: #2a363b;
+}
+
+/* .buildLinkClass */

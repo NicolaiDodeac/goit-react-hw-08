@@ -1,7 +1,7 @@
 import { User, Phone, Trash2 } from "lucide-react";
 import s from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContactThunk } from "../../redux/contactsOps";
+import { deleteContactThunk } from "../../redux/contacts/operations";
 
 const Contact = ({ item }) => {
   const dispatch = useDispatch();
