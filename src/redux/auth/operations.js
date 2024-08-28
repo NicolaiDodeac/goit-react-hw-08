@@ -1,14 +1,14 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const goItApi = axios.create({
+export const goItApi = axios.create({
   baseURL: "https://connections-api.goit.global",
 });
 
 const setAuthHeader = (token) => {
   goItApi.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
-const clearAuthHeader = (token) => {
+const clearAuthHeader = () => {
   goItApi.defaults.headers.common.Authorization = ``;
 };
 
@@ -43,6 +43,23 @@ export const fetchLogoutThunk = createAsyncThunk(
     try {
       await goItApi.post("/users/logout");
       clearAuthHeader();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchRefreshUserThunk = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (savedToken === null) {
+      return thunkAPI.rejectWithValue("no token");
+    }
+    try {
+      setAuthHeader(savedToken);
+      const { data } = await goItApi.get("/users/current");
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

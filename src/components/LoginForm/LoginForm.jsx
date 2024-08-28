@@ -60,7 +60,7 @@ const LoginForm = () => {
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
-                  Register
+                  Login
                 </button>
               </div>
             </Form>

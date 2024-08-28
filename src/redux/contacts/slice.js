@@ -7,6 +7,7 @@ import {
   fetchContactsThunk,
 } from "./operations";
 import { selectNameFilter } from "../filters/selectors";
+import { fetchLogoutThunk } from "../auth/operations";
 
 const initialState = {
   items: [],
@@ -23,7 +24,9 @@ const contactsSlice = createSlice({
       .addCase(fetchContactsThunk.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-
+      .addCase(fetchLogoutThunk.fulfilled, () => {
+        return initialState;
+      })
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.items.push(action.payload);
       })
@@ -61,8 +64,10 @@ const contactsSlice = createSlice({
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectNameFilter],
   (contacts, filter) => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
+    return contacts.filter(
+      (contact) =>
+        contact.name.toLowerCase().includes(filter.toLowerCase()) ||
+        contact.number.includes(filter)
     );
   }
 );

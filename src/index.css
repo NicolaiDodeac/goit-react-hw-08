@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .activeLinkHeader {
-  color: aliceblue;
+  color: rgb(108, 120, 246);
 }

@@ -1,14 +1,9 @@
 import { Field, Form, Formik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchRegisterThunk } from "../../redux/auth/operations";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const RegisterForm = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  if (isLoggedIn) {
-    return <Navigate to="/contacts" />;
-  }
   const dispatch = useDispatch();
   const initialValues = {
     name: "",
