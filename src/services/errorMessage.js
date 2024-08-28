@@ -6,5 +6,5 @@ export const errorMessage = (message) =>
     icon: "error",
     title: `${message}`,
     showConfirmButton: false,
-    timer: 2000,
+    timer: 2500,
   });

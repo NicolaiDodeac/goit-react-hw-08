@@ -5,7 +5,6 @@ import {
   fetchRefreshUserThunk,
   fetchRegisterThunk,
 } from "./operations";
-import { success } from "../../services/success";
 import { errorMessage } from "../../services/errorMessage";
 
 const initialState = {
@@ -35,6 +34,11 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+      })
+      .addCase(fetchLoginThunk.rejected, () => {
+        return errorMessage(
+          "Username or password is wrong, Please try again or go to Register!"
+        );
       })
       .addCase(fetchLogoutThunk.fulfilled, () => {
         return initialState;
