@@ -7,7 +7,7 @@
 }
 .findInputLabel {
   color: rgb(66, 63, 63);
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .findInput {
@@ -15,13 +15,11 @@
   max-width: 200px;
   border: none;
   padding: 5px 5px;
+
   &:focus {
     box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
       rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 
     outline: none;
-  }
-  &::placeholder {
-    color: rgb(197, 197, 199);
   }
 }

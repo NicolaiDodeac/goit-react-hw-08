@@ -6,5 +6,5 @@ export const success = (name) =>
     icon: "success",
     title: `Contact ${name} has been saved`,
     showConfirmButton: false,
-    timer: 1500,
+    timer: 2500,
   });

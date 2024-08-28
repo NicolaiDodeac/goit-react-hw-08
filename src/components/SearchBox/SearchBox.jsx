@@ -8,12 +8,12 @@ const SearchBox = () => {
 
   return (
     <div className={s.findInputWrapper}>
-      <label className={s.findInputLabel}>Find contacts by name</label>
+      <label className={s.findInputLabel}>Find contacts</label>
       <input
         className={s.findInput}
         value={searchStr}
         onChange={(e) => dispatch(filterContact(e.target.value))}
-        placeholder="Type name you wish to find "
+        placeholder="Type name or number "
       ></input>
     </div>
   );

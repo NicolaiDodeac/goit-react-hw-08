@@ -5,6 +5,8 @@ import {
   fetchRefreshUserThunk,
   fetchRegisterThunk,
 } from "./operations";
+import { success } from "../../services/success";
+import { errorMessage } from "../../services/errorMessage";
 
 const initialState = {
   user: {
@@ -25,6 +27,9 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+      })
+      .addCase(fetchRegisterThunk.rejected, () => {
+        return errorMessage("This user already exists, go to Login!");
       })
       .addCase(fetchLoginThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
